@@ -1,0 +1,13 @@
+.bar:after {
+    content: '';
+    height: 4px;
+    width: 0%;
+    background-color: rgb(186, 85, 85);
+    display: block; 
+    transition: width 0.5s ease-in-out;  /* Transition only the width property */
+}
+
+.bar:hover:after {
+    width: 100%;
+    background-color: rgb(255, 128, 0);
+}
