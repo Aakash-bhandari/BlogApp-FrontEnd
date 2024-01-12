@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import { Box, Typography, styled } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { Link, useNavigate, useParams } from 'react-router-dom'
-
+import { ToastContainer, toast } from 'react-toastify';
 import { API } from '../../service/api';
 
 import { DataContext } from '../../context/DataProvider';
@@ -77,7 +77,11 @@ const DetailView = () => {
     const deleteBlog = async () => {
         let response = await API.deletePost(post._id);
         if (response) {
-            navigate('/')
+            toast.success("Post Deleted Succesfully...");
+            toast.success("Redirecting to Home Page..");
+            setTimeout(() => {
+                navigate('/');
+            }, 2000)
         }
     }
 
@@ -93,8 +97,13 @@ const DetailView = () => {
                 {
                     account.username === post.username &&
                     <>
-                        <Link to={`/update/${post._id}`}><EditIcon color="primary" /></Link>
-                        <DeleteIcon onClick={() => deleteBlog()} color="error" />
+                        <Link to={`/update/${post._id}`} style={{ cursor: 'pointer' }}>
+                            <EditIcon color="primary" />
+                        </Link>
+
+                        <DeleteIcon onClick={() => deleteBlog()} color="error" style={{ cursor: 'pointer' }} />
+
+                        <ToastContainer />
                     </>
                 }
             </Box>

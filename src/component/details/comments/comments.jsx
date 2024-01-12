@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, TextareaAutosize, Button, styled } from '@mui/material';
-
+import { ToastContainer, toast } from 'react-toastify';
 import { DataContext } from '../../../context/DataProvider';
-import  Comment from  './comment';
+import Comment from './comment';
 import { API } from '../../../service/api';
 
 const Container = styled(Box)`
@@ -61,6 +61,7 @@ export const Comments = ({ post }) => {
 
     const addComment = async () => {
         await API.newComment(comment);
+        toast.success("Comment Added..")
         setComment(initialValue)
         setToggle(prev => !prev);
     }
@@ -68,6 +69,7 @@ export const Comments = ({ post }) => {
     return (
         <Box>
             <Container>
+                <ToastContainer />
                 <Image src={url} alt="_user" srcset="" />
                 <StyledTextArea
                     rowsMin={5}
