@@ -25,10 +25,8 @@ const Posts = ({ username }) => {
             const fetchData = async () => {
                 let response = await API.getAllPosts({ category: category || '' });
                 if (response.isSucces) {
-                    setTimeout(() => {
                         getPosts(response.data);
                         setLoading(false);
-                    }, 2000);
                 }
             };
             fetchData()
